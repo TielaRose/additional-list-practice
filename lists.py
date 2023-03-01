@@ -31,6 +31,21 @@ def multiplication_table(n):
 
     return result
 
+    # hackbright solution
+    # return [[i * j for i in range(1, n+1)] for j in range(1, n+1)]
+
+    # example: n = 3
+    # the inner part loops over i each time (i = 1, 2, 3) for EACH j (starting at j=1)
+
+    # so first j = 1, and we loop through all the i values
+    # [1 * 1, 2 * 1, 3 * 1] -> [1, 2, 3]
+
+    # then j = 2, and we loop again through the i values
+    # [1 * 2, 2 * 2, 3 * 2] -> [2, 4, 6]
+
+    # last j = 3, and we loop through the i values
+    # [1 * 3, 2 * 3, 3 * 3] -> [3, 6, 9]
+
 
 def find_common_items_minimum_index_sum(list1, list2):
     """
