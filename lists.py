@@ -4,13 +4,33 @@ Complete the following functions. To get a better idea of how each function
 should behave, see the examples in test_lists.py.
 """
 
+
 def multiplication_table(n):
     """
     Returns a 2-D array containing an nxn multiplication table
     where n is the argument passed in
     """
 
-    # TODO: replace this with your code
+    # ex: n = 3
+    # result = [[1, 2, 3],
+    #           [2, 4, 6],
+    #           [3, 6, 9]]
+
+    # initialize an empty result list
+    result = []
+
+    # initialize an empty top row list, listing each number from 1 - n
+    row1 = [num for num in range(1, n + 1)]
+
+    # append that row to the result list
+    result.append(row1)
+
+    for i in range(2, n+1):  # loop over the numbers 2, 3...n
+        row = [num * i for num in row1]  # create the next row
+        result.append(row)  # append that row to the result list
+
+    return result
+
 
 def find_common_items_minimum_index_sum(list1, list2):
     """
@@ -20,6 +40,7 @@ def find_common_items_minimum_index_sum(list1, list2):
     """
 
     # TODO: replace this with your code
+
 
 def replace_elements(arr):
     """
@@ -31,6 +52,7 @@ def replace_elements(arr):
 
     # TODO: replace this with your code
 
+
 def add_to_array_form(array_form_of_number, integer_to_add):
     """
     For a non-negative integer N, the array-form of N is an array of its digits in left to right order.
@@ -38,6 +60,7 @@ def add_to_array_form(array_form_of_number, integer_to_add):
     """
 
     # TODO: replace this with your code
+
 
 if __name__ == "__main__":
     from pathlib import Path
