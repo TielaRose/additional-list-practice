@@ -54,7 +54,63 @@ def find_common_items_minimum_index_sum(list1, list2):
     items with the lowest index sum.
     """
 
-    # TODO: replace this with your code
+    # common_items = []  # Initialize a list to hold the commmon item(s)
+    # # Set index_sum to the max it could be for these two lists
+    # index_sum = len(list1) + len(list2) - 2
+
+    # # Iterate over list1
+    # for item in list1:
+    #     if item in list2:
+    #         # Find the index of the item in list1
+    #         ind_list1 = list1.index(item)
+    #         # Find the index of the item in list2
+    #         ind_list2 = list2.index(item)
+    #         # Initialize a new variable for the sum of these indices
+    #         inside_index_sum = ind_list1 + ind_list2
+    #         # Compare the sum of these indices to the current "lowest sum" (index_sum)
+    #         if inside_index_sum < index_sum:
+    #             # If it's lower, replace the common items
+    #             common_items[:] = [item]
+    #         elif inside_index_sum == index_sum:  # If it's the same, add it to the common items list
+    #             common_items.append(item)
+
+    # # Return the list of common items
+    # return common_items
+
+    common_items = []  # Initialize a list to hold the commmon item(s)
+
+    list1_len = len(list1)
+    list2_len = len(list2)
+    # Set index_sum to the max it could be for these two lists
+    min_index_sum = list1_len + list2_len - 2
+
+    # Find out which list is shorter
+    if list1_len < list2_len:
+        smaller = list1
+        bigger = list2
+    else:
+        smaller = list2
+        bigger = list1
+
+    # Iterate over the smaller list
+    for item in smaller:
+        if item in bigger:
+            # Find the index of the item in the smaller list
+            ind_smaller = smaller.index(item)
+            # Find the index of the item in the bigger list
+            ind_bigger = bigger.index(item)
+            # Initialize a new variable for the sum of these indices
+            curr_index_sum = ind_smaller + ind_bigger
+            # Compare the sum of these indices to the current "lowest sum" (index_sum)
+            if curr_index_sum < min_index_sum:
+                # If it's lower, replace the common items
+                curr_index_sum = min_index_sum
+                common_items[:] = [item]
+            elif curr_index_sum == min_index_sum:  # If it's the same, add it to the common items list
+                common_items.append(item)
+
+    # Return the list of common items
+    return common_items
 
 
 def replace_elements(arr):
