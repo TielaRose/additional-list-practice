@@ -132,7 +132,34 @@ def add_to_array_form(array_form_of_number, integer_to_add):
     Takes the array-form of a non-negative integer (`array_form_of_number`) as well as an integer to add to it (`integer_to_add`) and returns the array-form of their sum.
     """
 
-    # TODO: replace this with your code
+    # ex: array_form_of_number = [4, 9, 7, 2]
+    # ex: integer_to_add = 64
+    # Unclear from this function stub if I'm supposed to modify the input array or not. To be safe, I won't modify it.
+    # Make a copy of the input array
+    sum_array = array_form_of_number[:]
+
+    # Loop over the input array, starting from the end
+    index = -1
+    while integer_to_add > 0:
+        digit_to_add = integer_to_add % 10  # Get the final digit of the integer_to_add
+        integer_to_add = integer_to_add // 10  # Remove that integer from integer_to_add
+
+        # If the index has surpassed the length of the original input array, then the first (leftmost) digit of the sum array should be 1, and we can end the loop
+        if index * -1 > len(array_form_of_number):
+            sum_array[0:0] = [1]
+            break
+        else:
+            total = sum_array[index] + digit_to_add  # Add the digits
+
+            if total < 10:  # If the sum is less than 10, replace the number with the sum
+                sum_array[index] = total
+            else:  # If the sum is greater than 10, replace the number with the ones digit, and 'carry' the 1
+                sum_array[index] = total - 10
+                integer_to_add += 1
+
+            index -= 1  # Decrement the index to go to the next digit to the left
+
+    return sum_array
 
 
 if __name__ == "__main__":
