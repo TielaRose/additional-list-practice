@@ -20,14 +20,15 @@ def multiplication_table(n):
     result = []
 
     # initialize an empty top row list, listing each number from 1 - n
-    row1 = [num for num in range(1, n + 1)]
+    if n != 0:
+        row1 = [num for num in range(1, n + 1)]
 
-    # append that row to the result list
-    result.append(row1)
+        # append that row to the result list
+        result.append(row1)
 
-    for i in range(2, n+1):  # loop over the numbers 2, 3...n
-        row = [num * i for num in row1]  # create the next row
-        result.append(row)  # append that row to the result list
+        for i in range(2, n+1):  # loop over the numbers 2, 3...n
+            row = [num * i for num in row1]  # create the next row
+            result.append(row)  # append that row to the result list
 
     return result
 
@@ -53,29 +54,6 @@ def find_common_items_minimum_index_sum(list1, list2):
     (the sum of the index of the item in each list.) If there is a tie, return all
     items with the lowest index sum.
     """
-
-    # common_items = []  # Initialize a list to hold the commmon item(s)
-    # # Set index_sum to the max it could be for these two lists
-    # index_sum = len(list1) + len(list2) - 2
-
-    # # Iterate over list1
-    # for item in list1:
-    #     if item in list2:
-    #         # Find the index of the item in list1
-    #         ind_list1 = list1.index(item)
-    #         # Find the index of the item in list2
-    #         ind_list2 = list2.index(item)
-    #         # Initialize a new variable for the sum of these indices
-    #         inside_index_sum = ind_list1 + ind_list2
-    #         # Compare the sum of these indices to the current "lowest sum" (index_sum)
-    #         if inside_index_sum < index_sum:
-    #             # If it's lower, replace the common items
-    #             common_items[:] = [item]
-    #         elif inside_index_sum == index_sum:  # If it's the same, add it to the common items list
-    #             common_items.append(item)
-
-    # # Return the list of common items
-    # return common_items
 
     common_items = []  # Initialize a list to hold the commmon item(s)
 
@@ -104,7 +82,7 @@ def find_common_items_minimum_index_sum(list1, list2):
             # Compare the sum of these indices to the current "lowest sum" (index_sum)
             if curr_index_sum < min_index_sum:
                 # If it's lower, replace the common items
-                curr_index_sum = min_index_sum
+                min_index_sum = curr_index_sum
                 common_items[:] = [item]
             elif curr_index_sum == min_index_sum:  # If it's the same, add it to the common items list
                 common_items.append(item)
@@ -117,11 +95,33 @@ def replace_elements(arr):
     """
     Replaces each element in arr with the greatest item among the elements to its right,
     and replace the last element with -1 since there are no elements to its right.
-    For example [9,1,3,8] would turn into [9, 8, 8, -1].
+    For example [9,1,3,8] would turn into [8, 8, 8, -1].
     The input array arr will be modified and the function will return None.
     """
 
-    # TODO: replace this with your code
+    # my first solution
+
+    # loop over the array
+    # for index, _ in enumerate(arr):
+    #     if arr[index] == arr[-1]:  # set the last item to -1
+    #         arr[index] = -1
+    #         break
+    #     else:  # look for the max to the right of each item, set that item to that max
+    #         arr[index] = max(arr[index + 1:])
+
+    # this solution technically works, but is ineffcient in a few ways:
+    # 1) it checks EVERY item to see if it's the last item. Seems like I should do this only once
+    # 2) it rechecks the max of everything else EVERY time. Seems like I should be able to keep track of the max
+
+    # what if I went backwards? [17, 18, 5, 4, 6, 1] --> [18, 6, 6, 6, 1, -1]
+    curr_max = arr[-1]  # set the max to the last item in the array
+    arr[-1] = -1  # set that last item to -1
+
+    # loop through the array backwards, starting from the second-to-last item
+    for index, num in enumerate(arr[-2::-1]):
+        arr[index] = curr_max  # set the current item to the current max
+        if num > curr_max:
+            curr_max = num
 
 
 def add_to_array_form(array_form_of_number, integer_to_add):
