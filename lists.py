@@ -99,9 +99,9 @@ def replace_elements(arr):
     The input array arr will be modified and the function will return None.
     """
 
-    # my first solution
+    # # my first solution
 
-    # loop over the array
+    # # loop over the array
     # for index, _ in enumerate(arr):
     #     if arr[index] == arr[-1]:  # set the last item to -1
     #         arr[index] = -1
@@ -118,10 +118,12 @@ def replace_elements(arr):
     arr[-1] = -1  # set that last item to -1
 
     # loop through the array backwards, starting from the second-to-last item
-    for index, num in enumerate(arr[-2::-1]):
-        arr[index] = curr_max  # set the current item to the current max
+    curr_index = -2
+    for num in arr[-2::-1]:
+        arr[curr_index] = curr_max  # set the current item to the current max
         if num > curr_max:
             curr_max = num
+        curr_index -= 1
 
 
 def add_to_array_form(array_form_of_number, integer_to_add):
